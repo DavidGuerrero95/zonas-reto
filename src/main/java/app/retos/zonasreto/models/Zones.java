@@ -15,16 +15,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Zones {
 
-	@Id
-	@JsonIgnore
-	private String id;
+    @Id
+    @JsonIgnore
+    private String id;
 
-	@Indexed(unique = true)
-	private Integer zoneCode;
+    @Indexed(unique = true)
+    private Integer zoneCode;
 
-	@NotBlank(message = "Locacion no puede ser null")
-	private List<Double> location;
+    @NotBlank(message = "Locacion no puede ser null")
+    private List<Double> location;
 
-	private List<String> idEvents;
+    private List<String> idEvents;
 
 }

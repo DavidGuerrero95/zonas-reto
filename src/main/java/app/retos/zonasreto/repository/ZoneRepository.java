@@ -7,10 +7,10 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 public interface ZoneRepository extends MongoRepository<Zones, String> {
 
-	@RestResource(path = "find-zone")
-	public Zones findByZoneCode(@Param("zoneCode") Integer zoneCode);
-	
-	@RestResource(path = "exists-muro")
-	public Boolean existsByZoneCode(@Param("zoneCode") Integer zoneCode);
+    @RestResource(path = "find-zone")
+    Zones findByZoneCode(@Param("zoneCode") Integer zoneCode);
+
+    @RestResource(path = "exists-muro")
+    Boolean existsByZoneCode(@Param("zoneCode") Integer zoneCode);
 
 }

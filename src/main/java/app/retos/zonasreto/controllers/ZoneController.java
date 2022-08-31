@@ -27,7 +27,7 @@ public class ZoneController {
     @PostMapping("/crear")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String crearZonas(@RequestBody @Validated Zones zones) {
-        if(zonesService.crearZonas(zones))
+        if (zonesService.crearZonas(zones))
             return "Zona creada satisfactoriamente";
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error en la creación de la zona");
     }
@@ -35,7 +35,7 @@ public class ZoneController {
     // MICROSERVICIO EVENTS -> CREAR
     @PostMapping("/events/crear/")
     public Integer crearZonesEvents(@RequestParam("idEvents") String idEvents,
-                                       @RequestParam("location") List<Double> location) throws IOException {
+                                    @RequestParam("location") List<Double> location) throws IOException {
         try {
             return zonesService.crearZonasEvents(idEvents, location);
         } catch (Exception e2) {
