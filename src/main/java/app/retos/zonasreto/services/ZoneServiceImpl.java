@@ -34,8 +34,8 @@ public class ZoneServiceImpl implements IZonesService {
     @Override
     public Boolean crearZonas(Zones zones) {
         zones.setLocation(new ArrayList<>(Arrays.asList(
-                new BigDecimal(zones.getLocation().get(0)).setScale(5, RoundingMode.HALF_UP).doubleValue(),
-                new BigDecimal(zones.getLocation().get(1)).setScale(5, RoundingMode.HALF_UP).doubleValue())));
+                BigDecimal.valueOf(zones.getLocation().get(0)).setScale(5, RoundingMode.HALF_UP).doubleValue(),
+                BigDecimal.valueOf(zones.getLocation().get(1)).setScale(5, RoundingMode.HALF_UP).doubleValue())));
         zones.setZoneCode(zoneRepository.findAll().size());
         try {
             zoneRepository.save(zones);
