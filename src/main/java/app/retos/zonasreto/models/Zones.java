@@ -22,7 +22,7 @@ public class Zones {
 	@Indexed(unique = true)
 	private Integer zoneCode;
 
-	@NotBlank(message = "Locacion no puede se null")
+	@NotBlank(message = "Locacion no puede ser null")
 	private List<Double> location;
 
 	private List<String> idEvents;
