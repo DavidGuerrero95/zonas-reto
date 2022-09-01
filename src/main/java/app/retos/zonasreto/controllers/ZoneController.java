@@ -32,12 +32,12 @@ public class ZoneController {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error en la creación de la zona");
     }
 
-    // MICROSERVICIO EVENTS -> CREAR
+    // MICROSERVICIO SENSORES -> CREAR
     @PostMapping("/events/crear/")
-    public Integer crearZonesEvents(@RequestParam("idEvents") String idEvents,
-                                    @RequestParam("location") List<Double> location) throws IOException {
+    public Integer crearZonesPosts(@RequestParam("idEvents") Integer idPosts,
+                                   @RequestParam("location") List<Double> location) throws IOException {
         try {
-            return zonesService.crearZonasEvents(idEvents, location);
+            return zonesService.crearZonasPostes(idPosts, location);
         } catch (Exception e2) {
             throw new IOException("Error crear proyectos, muro: " + e2.getMessage());
         }

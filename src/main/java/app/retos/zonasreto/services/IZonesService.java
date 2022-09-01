@@ -12,6 +12,6 @@ public interface IZonesService {
 
     Boolean crearZonas(Zones zones);
 
-    Integer crearZonasEvents(String idEvents, List<Double> location);
+    Integer crearZonasPostes(Integer idEvents, List<Double> location);
 
 }

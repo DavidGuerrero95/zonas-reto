@@ -26,5 +26,6 @@ public class Zones {
     private List<Double> location;
 
     private List<String> idEvents;
+    private List<Integer> idPosts;
 
 }

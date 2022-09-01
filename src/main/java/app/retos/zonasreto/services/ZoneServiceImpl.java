@@ -47,24 +47,23 @@ public class ZoneServiceImpl implements IZonesService {
     }
 
     @Override
-    public Integer crearZonasEvents(String idEvents, List<Double> location) {
+    public Integer crearZonasPostes(Integer idPost, List<Double> location) {
         Zones newZone = new Zones();
         if (zoneRepository.findAll().isEmpty()) {
             newZone.setZoneCode(zoneRepository.findAll().size());
             newZone.setLocation(location);
-            List<String> listaPrimera = new ArrayList<>(Collections.singletonList(idEvents));
-            newZone.setIdEvents(listaPrimera);
+            newZone.setIdPosts(Arrays.asList(idPost));
             zoneRepository.save(newZone);
         } else {
             boolean bandera1 = false;
             for (int i = 0; i < zoneRepository.findAll().size(); i++) {
                 Double distancia = distanciaCoord(zoneRepository.findAll().get(i).getLocation(), location);
-                if (distancia <= 1 && !bandera1) {
+                if (distancia <= 3 && !bandera1) {
                     newZone = zoneRepository.findByZoneCode(i);
-                    List<String> listEvents = newZone.getIdEvents();
-                    listEvents.add(idEvents);
-                    newZone.setIdEvents(listEvents);
-                    if (listEvents.size() <= 4) {
+                    List<Integer> listPosts = newZone.getIdPosts();
+                    listPosts.add(idPost);
+                    newZone.setIdPosts(listPosts);
+                    if (listPosts.size() <= 4) {
                         List<Double> listaNuevaLocalizacion = distanciaMedia(newZone.getLocation(), location);
                         newZone.setLocation(listaNuevaLocalizacion);
                     }
@@ -73,11 +72,9 @@ public class ZoneServiceImpl implements IZonesService {
                 }
             }
             if (!bandera1) {
-                List<String> lista = new ArrayList<>();
                 newZone.setZoneCode(zoneRepository.findAll().size());
                 newZone.setLocation(location);
-                lista.add(idEvents);
-                newZone.setIdEvents(lista);
+                newZone.setIdPosts(Arrays.asList(idPost));
                 zoneRepository.save(newZone);
             }
         }
