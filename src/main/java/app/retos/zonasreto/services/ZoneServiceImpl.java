@@ -74,7 +74,7 @@ public class ZoneServiceImpl implements IZonesService {
             if (!bandera1) {
                 newZone.setZoneCode(zoneRepository.findAll().size());
                 newZone.setLocation(location);
-                newZone.setIdPosts(Arrays.asList(idPost));
+                newZone.setIdPosts(Collections.singletonList(idPost));
                 zoneRepository.save(newZone);
             }
         }
@@ -90,8 +90,8 @@ public class ZoneServiceImpl implements IZonesService {
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return (double) 0;
         } else {
-            Double theta = lon1 - lon2;
-            Double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
                     + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
             dist = Math.toDegrees(dist);
@@ -108,16 +108,16 @@ public class ZoneServiceImpl implements IZonesService {
         Double lat2 = pos2.get(0);
         Double lon2 = pos1.get(1);
 
-        Double dLon = Math.toRadians(lon2 - lon1);
+        double dLon = Math.toRadians(lon2 - lon1);
         lat1 = Math.toRadians(lat1);
         lat2 = Math.toRadians(lat2);
         lon1 = Math.toRadians(lon1);
 
-        Double Bx = Math.cos(lat2) * Math.cos(dLon);
+        double Bx = Math.cos(lat2) * Math.cos(dLon);
         Double By = Math.cos(lat2) * Math.sin(dLon);
-        Double lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
+        double lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
                 Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
-        Double lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+        double lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
         lat3 = Math.toDegrees(lat3);
         lon3 = Math.toDegrees(lon3);
         BigDecimal bdlat3 = new BigDecimal(lat3).setScale(5, RoundingMode.HALF_UP);
