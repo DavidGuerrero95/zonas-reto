@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/zona")
+@RequestMapping("/zonas")
 public class ZoneController {
 
     @Autowired
@@ -33,11 +33,22 @@ public class ZoneController {
     }
 
     // MICROSERVICIO SENSORES -> CREAR
-    @PostMapping("/events/crear/")
+    @PostMapping("/sensores/crear/")
     public Integer crearZonesPosts(@RequestParam("idEvents") Integer idPosts,
                                    @RequestParam("location") List<Double> location) throws IOException {
         try {
             return zonesService.crearZonasPostes(idPosts, location);
+        } catch (Exception e2) {
+            throw new IOException("Error crear proyectos, muro: " + e2.getMessage());
+        }
+    }
+
+    // MICROSERVICIO EVENTS -> CREAR
+    @GetMapping("/events/crear/")
+    public Integer obtainZonesEvents(@RequestParam("idEvents") String idEvents,
+                                   @RequestParam("location") List<Double> location) throws IOException {
+        try {
+            return zonesService.crearZonasEvents(idEvents, location);
         } catch (Exception e2) {
             throw new IOException("Error crear proyectos, muro: " + e2.getMessage());
         }
