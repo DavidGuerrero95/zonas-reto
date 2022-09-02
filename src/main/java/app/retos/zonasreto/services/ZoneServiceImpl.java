@@ -81,6 +81,31 @@ public class ZoneServiceImpl implements IZonesService {
         return newZone.getZoneCode();
     }
 
+    @Override
+    public Integer crearZonasEvents(String idEvents, List<Double> location) {
+        Zones newZone = new Zones();
+        boolean bandera1 = false;
+        for (int i = 0; i < zoneRepository.findAll().size(); i++) {
+            Double distancia = distanciaCoord(zoneRepository.findAll().get(i).getLocation(), location);
+            if (distancia <= 3 && !bandera1) {
+                newZone = zoneRepository.findByZoneCode(i);
+                List<String> listEvents = newZone.getIdEvents();
+                listEvents.add(idEvents);
+                newZone.setIdEvents(listEvents);
+                if (listEvents.size() <= 4) {
+                    List<Double> listaNuevaLocalizacion = distanciaMedia(newZone.getLocation(), location);
+                    newZone.setLocation(listaNuevaLocalizacion);
+                }
+                zoneRepository.save(newZone);
+                bandera1 = true;
+            }
+        }
+        if(bandera1)
+            return newZone.getZoneCode();
+        else
+            return 0;
+    }
+
     private Double distanciaCoord(List<Double> pos1, List<Double> pos2) {
         // double radioTierra = 3958.75;//en millas
         Double lat1 = pos1.get(0);
