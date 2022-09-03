@@ -62,7 +62,7 @@ public class ZoneController {
     }
 
     // VER CANTIDAD REPORTES
-    @GetMapping("/numero/delitos/{codigo}")
+    @GetMapping("/numero/eventos/{codigo}")
     @ResponseStatus(code = HttpStatus.OK)
     public Integer numeroDelitos(@PathVariable("codigo") Integer codigo){
         if (zoneRepository.existsByZoneCode(codigo))
