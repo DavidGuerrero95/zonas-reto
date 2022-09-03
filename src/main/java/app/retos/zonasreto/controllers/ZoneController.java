@@ -78,4 +78,14 @@ public class ZoneController {
             return zonesService.encontrarZonas(codigo);
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La zona no existe");
     }
+
+    @DeleteMapping("/eliminar/{codigo}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public boolean eliminarZona(@PathVariable("codigo") Integer codigo){
+        if (zoneRepository.existsByZoneCode(codigo)) {
+            zoneRepository.deleteByZoneCode(codigo);
+            return true;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La zona no existe");
+    }
 }

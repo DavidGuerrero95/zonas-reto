@@ -13,4 +13,7 @@ public interface ZoneRepository extends MongoRepository<Zones, String> {
     @RestResource(path = "exists-muro")
     Boolean existsByZoneCode(@Param("zoneCode") Integer zoneCode);
 
+    @RestResource(path = "delete-muro")
+    Boolean deleteByZoneCode(@Param("zoneCode") Integer zoneCode);
+
 }
