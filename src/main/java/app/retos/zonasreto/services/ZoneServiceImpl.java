@@ -97,10 +97,6 @@ public class ZoneServiceImpl implements IZonesService {
                 List<String> listEvents = newZone.getIdEvents();
                 listEvents.add(idEvents);
                 newZone.setIdEvents(listEvents);
-                if (listEvents.size() <= 4) {
-                    List<Double> listaNuevaLocalizacion = distanciaMedia(newZone.getLocation(), location);
-                    newZone.setLocation(listaNuevaLocalizacion);
-                }
                 zoneRepository.save(newZone);
                 bandera1 = true;
             }
