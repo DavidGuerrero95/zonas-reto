@@ -89,7 +89,7 @@ public class ZoneServiceImpl implements IZonesService {
         boolean bandera1 = false;
         for (int i = 0; i < zoneRepository.findAll().size(); i++) {
             Double distancia = distanciaCoord(zoneRepository.findAll().get(i).getLocation(), location);
-            if (distancia <= 3 && !bandera1) {
+            if (distancia <= 2 && !bandera1) {
                 newZone = zoneRepository.findByZoneCode(i);
                 List<String> listEvents = newZone.getIdEvents();
                 listEvents.add(idEvents);
