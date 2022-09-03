@@ -55,12 +55,14 @@ public class ZoneServiceImpl implements IZonesService {
             newZone.setZoneCode(zoneRepository.findAll().size());
             newZone.setLocation(location);
             newZone.setIdPosts(Arrays.asList(idPost));
+            newZone.setIdEvents(new ArrayList<>());
             zoneRepository.save(newZone);
+            log.info("Zona repository esta vacio");
         } else {
             boolean bandera1 = false;
             for (int i = 0; i < zoneRepository.findAll().size(); i++) {
                 Double distancia = distanciaCoord(zoneRepository.findAll().get(i).getLocation(), location);
-                if (distancia <= 3 && !bandera1) {
+                if (distancia <= 1 && !bandera1) {
                     newZone = zoneRepository.findByZoneCode(i);
                     List<Integer> listPosts = newZone.getIdPosts();
                     listPosts.add(idPost);
@@ -76,6 +78,7 @@ public class ZoneServiceImpl implements IZonesService {
             if (!bandera1) {
                 newZone.setZoneCode(zoneRepository.findAll().size());
                 newZone.setLocation(location);
+                newZone.setIdEvents(new ArrayList<>());
                 newZone.setIdPosts(Collections.singletonList(idPost));
                 zoneRepository.save(newZone);
             }
