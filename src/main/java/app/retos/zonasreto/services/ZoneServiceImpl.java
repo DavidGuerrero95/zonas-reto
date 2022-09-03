@@ -37,11 +37,13 @@ public class ZoneServiceImpl implements IZonesService {
                 BigDecimal.valueOf(zones.getLocation().get(0)).setScale(5, RoundingMode.HALF_UP).doubleValue(),
                 BigDecimal.valueOf(zones.getLocation().get(1)).setScale(5, RoundingMode.HALF_UP).doubleValue())));
         zones.setZoneCode(zoneRepository.findAll().size());
+        zones.setIdEvents(new ArrayList<>());
+        zones.setIdPosts(new ArrayList<>());
         try {
             zoneRepository.save(zones);
             return true;
         } catch (MongoException e) {
-            log.error("Error en la edición: " + e.getMessage());
+            log.error("Error en la creación: " + e.getMessage());
             return false;
         }
     }
