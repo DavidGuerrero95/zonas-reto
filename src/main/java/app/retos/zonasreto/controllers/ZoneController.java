@@ -61,6 +61,15 @@ public class ZoneController {
         return zonesService.encontrarZonas();
     }
 
+    // VER CANTIDAD REPORTES
+    @GetMapping("/numero/delitos/{codigo}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Integer numeroDelitos(@PathVariable("codigo") Integer codigo){
+        if (zoneRepository.existsByZoneCode(codigo))
+            return zoneRepository.findByZoneCode(codigo).getIdEvents().size();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La zona no existe");
+    }
+
     // OBTENER ZONA
     @GetMapping("/buscar/{codigo}")
     @ResponseStatus(code = HttpStatus.FOUND)
