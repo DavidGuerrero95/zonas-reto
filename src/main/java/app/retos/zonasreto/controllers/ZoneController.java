@@ -93,6 +93,12 @@ public class ZoneController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La zona no existe");
     }
 
+    @DeleteMapping("/eliminar/all")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void eliminarAll() {
+        zoneRepository.deleteAll();
+    }
+
     @PutMapping("/arreglar")
     @ResponseStatus(HttpStatus.OK)
     public void arreglar() {
