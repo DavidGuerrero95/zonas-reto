@@ -92,19 +92,30 @@ public class ZoneServiceImpl implements IZonesService {
         boolean bandera1 = false;
         for (int i = 0; i < zoneRepository.findAll().size(); i++) {
             Double distancia = distanciaCoord(zoneRepository.findAll().get(i).getLocation(), location);
-            if (distancia <= 1 && !bandera1) {
+            if (distancia <= 1) {
                 newZone = zoneRepository.findByZoneCode(i);
                 List<String> listEvents = newZone.getIdEvents();
                 listEvents.add(idEvents);
                 newZone.setIdEvents(listEvents);
                 zoneRepository.save(newZone);
                 bandera1 = true;
+                break;
             }
         }
         if(bandera1)
             return newZone.getZoneCode();
         else
             return 0;
+    }
+
+    @Override
+    public Integer modificarZonasEvents(String idEvents, List<Double> location, Integer zoneCode) {
+        Zones zones = zoneRepository.findByZoneCode(zoneCode);
+        List<String> listEvents = zones.getIdEvents();
+        listEvents.remove(idEvents);
+        zones.setIdEvents(listEvents);
+        zoneRepository.save(zones);
+        return crearZonasEvents(idEvents, location);
     }
 
     private Double distanciaCoord(List<Double> pos1, List<Double> pos2) {

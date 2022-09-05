@@ -58,6 +58,17 @@ public class ZoneController {
         }
     }
 
+    @GetMapping("/events/actualizar/")
+    public Integer obtainZonesEventsManyTimes(@RequestParam("idEvents") String idEvents,
+                                              @RequestParam("location") List<Double> location,
+                                              @RequestParam("zoneCode") Integer zoneCode) throws IOException {
+        try {
+            return zonesService.modificarZonasEvents(idEvents, location, zoneCode);
+        } catch (Exception e2) {
+            throw new IOException("Error crear proyectos, muro: " + e2.getMessage());
+        }
+    }
+
     // LISTAR ZONAS
     @GetMapping("/listar")
     @ResponseStatus(code = HttpStatus.OK)
