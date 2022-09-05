@@ -50,7 +50,7 @@ public class ZoneController {
     // MICROSERVICIO EVENTS -> CREAR
     @GetMapping("/events/crear/")
     public Integer obtainZonesEvents(@RequestParam("idEvents") String idEvents,
-                                   @RequestParam("location") List<Double> location) throws IOException {
+                                     @RequestParam("location") List<Double> location) throws IOException {
         try {
             return zonesService.crearZonasEvents(idEvents, location);
         } catch (Exception e2) {
@@ -68,7 +68,7 @@ public class ZoneController {
     // VER CANTIDAD REPORTES
     @GetMapping("/numero/eventos/{codigo}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Integer numeroDelitos(@PathVariable("codigo") Integer codigo){
+    public Integer numeroDelitos(@PathVariable("codigo") Integer codigo) {
         if (zoneRepository.existsByZoneCode(codigo))
             return zoneRepository.findByZoneCode(codigo).getIdEvents().size();
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La zona no existe");
@@ -85,7 +85,7 @@ public class ZoneController {
 
     @DeleteMapping("/eliminar/{codigo}")
     @ResponseStatus(code = HttpStatus.OK)
-    public boolean eliminarZona(@PathVariable("codigo") Integer codigo){
+    public boolean eliminarZona(@PathVariable("codigo") Integer codigo) {
         if (zoneRepository.existsByZoneCode(codigo)) {
             zoneRepository.deleteByZoneCode(codigo);
             return true;
@@ -95,7 +95,7 @@ public class ZoneController {
 
     @PutMapping("/arreglar")
     @ResponseStatus(HttpStatus.OK)
-    public void arreglar(){
+    public void arreglar() {
         List<Zones> z = zoneRepository.findAll();
         z.forEach(x -> {
             Zones z2 = zoneRepository.findByZoneCode(x.getZoneCode());
